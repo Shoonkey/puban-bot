@@ -1,0 +1,33 @@
+{
+  "name": "puban-bot",
+  "version": "1.0.0",
+  "description": "A bot built to teach people about a made-up cipher I've made with a friend. The cipher is called Puban.",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "ts-node .",
+    "start:dev": "cross-env NODE_ENV=development npm run start",
+    "start:prod": "cross-env NODE_ENV=production npm run start",
+    "deploy": "ts-node src/scripts/deploy-commands.ts",
+    "deploy:dev": "cross-env NODE_ENV=development npm run deploy",
+    "deploy:prod": "cross-env NODE_ENV=production npm run deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shoonkey/puban-bot.git"
+  },
+  "homepage": "https://github.com/Shoonkey/puban-bot#readme",
+  "keywords": [],
+  "author": "Shoonkey <shoonkey.dev@gmail.com> (https://shoonkey.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.8.2",
+    "eslint": "^8.50.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "discord.js": "^14.13.0",
+    "dotenv": "^16.3.1"
+  }
+}
