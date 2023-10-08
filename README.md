@@ -16,7 +16,7 @@ npm i
 
 ### Setting up the environment
 
-After creating the bot in the [Discord applications tab](https://discord.com/developers/applications), you'll get a token and a client ID, which you can use to set up the production environment (through `.env.production`), and for the development environment you can use a specific guild ID (through `.env.development`) to scope the updates. Your environment file will look like `.env.example`.
+After creating the bot in the [Discord applications tab](https://discord.com/developers/applications), you'll get a token and a client ID, which you can use to set up your environment (through a file called `.env.development` or `.env.production`). Your environment file should look like `.env.example`. You can omit `GUILD_ID` for the deploy command to publish commands to all servers the bot is in, or specify it to scope it to a specific server.
 
 > Remember to keep the environment file secret as leaking this information can lead to malicious behavior happening freely on the bot. If for some reason your bot token gets leaked, access the developer application tab and reset it; that will invalidate the previous token and prevent further malicious behavior!
 
@@ -28,15 +28,16 @@ To invite your bot to a guild, you can use the *URL generator* tab, under the *O
 
 After your bot has joined a guild, for the slash commands to appear on the interface, it's necessary to tell Discord what commands are there (i.e. effectively deploy them). You can deploy commands globally (for all guilds your bot is on) or locally (for specific guilds).
 
-To deploy *for a specific guild*, run
+> Remember that setting a GUILD_ID in your environment file will scope the update to a specific guild (server). You can find a guild ID it by enabling dev mode on Discord and then right-clicking your guild and then "Copy server ID".
+
+To deploy using data from `.env.development`, run
 
 ```sh
 npm run deploy:dev
 ```
 
-> Remember to have your GUILD_ID defined in your .env.development file for this to properly register the commands. You can find it by enabling dev mode on Discord and then right-clicking your guild and then "Copy server ID".
 
-To deploy *for all guilds your bot is on*, run
+To deploy using data from `.env.produciton`, run
 
 ```sh
 npm run deploy:prod

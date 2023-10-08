@@ -1,7 +1,7 @@
 import { REST, Routes } from "discord.js";
+import { config as loadEnvironment } from "dotenv";
 
 import loadCommands from "../core/load-commands";
-import loadEnvironment from "../core/load-environment";
 
 loadEnvironment();
 
@@ -17,29 +17,20 @@ async function deployCommands() {
   // Construct and prepare an instance of the REST module
   const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
 
-  try {
-    if (process.env.NODE_ENV === "development") {
-      if (!process.env.GUILD_ID)
-        throw new Error(
-          "A guild ID must be informed in the environment file for development mode"
-        );
-
-      // Refresh commands in development server
-      await rest.put(
-        Routes.applicationGuildCommands(
-          process.env.CLIENT_ID,
-          process.env.GUILD_ID
-        ),
-        { body: commandData }
-      );
-    } else {
-      // Refresh commands in all servers bot is in
-      await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {
-        body: commandData,
-      });
-    }
-  } catch (error) {
-    console.error(error);
+  if (process.env.GUILD_ID) {
+    // Refresh commands for a specific server
+    await rest.put(
+      Routes.applicationGuildCommands(
+        process.env.CLIENT_ID,
+        process.env.GUILD_ID
+      ),
+      { body: commandData }
+    );
+  } else {
+    // Refresh commands in all servers bot is in
+    await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {
+      body: commandData,
+    });
   }
 }
 
