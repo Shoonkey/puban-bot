@@ -1,6 +1,7 @@
 import Puban from "../src/languages/puban";
+import Mutation from "./util/Mutation";
 
-const mutations = [
+const mutations: Mutation[] = [
   {
     base: "Me gustan los árboles",
     encrypted: "Ubemaye ubustubangaye uboslaye bárbubolubesuaye"
@@ -11,8 +12,7 @@ const mutations = [
   },
   {
     base: "Gracias!",
-    encrypted: "Rubacubiasgaye!",
-    todo: true
+    encrypted: "Rubacubiasgaye!"
   }
 ];
 

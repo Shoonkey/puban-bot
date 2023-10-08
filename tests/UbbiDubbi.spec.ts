@@ -1,6 +1,7 @@
 import UbbiDubbi from "../src/languages/ubbi-dubbi";
+import Mutation from "./util/Mutation";
 
-const mutations = [
+const mutations: Mutation[] = [
   {
     base: "Me gustan los árboles",
     encrypted: "Mube gubustuban lubos ubárbubolubes"
@@ -11,8 +12,7 @@ const mutations = [
   },
   {
     base: "Gracias!",
-    encrypted: "Grubacubias!",
-    todo: true
+    encrypted: "Grubacubias!"
   }
 ];
 

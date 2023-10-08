@@ -1,6 +1,7 @@
 import PigLatin from "../src/languages/pig-latin";
+import Mutation from "./util/Mutation";
 
-const mutations = [
+const mutations: Mutation[] = [
   {
     base: "Me gustan los árboles",
     encrypted: "Emaye ustangaye oslaye rbolesáaye"
@@ -11,8 +12,7 @@ const mutations = [
   },
   {
     base: "Gracias!",
-    encrypted: "Raciasgaye!",
-    todo: true
+    encrypted: "Raciasgaye!"
   }
 ];
 

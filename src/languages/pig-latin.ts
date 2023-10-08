@@ -2,7 +2,7 @@
 const SUFFIX = "aye";
 
 // Regex for capturing words
-const wordRegex = /\S+/gi;
+const wordRegex = /[a-záéíóúü]+/gi;
 
 function capitalizeStr(str: string): string {
   return str[0].toUpperCase() + str.substring(1);
