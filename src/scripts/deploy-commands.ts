@@ -1,7 +1,7 @@
 import { REST, Routes } from "discord.js";
-import { config as loadEnvironment } from "dotenv";
 
 import loadCommands from "../core/load-commands";
+import loadEnvironment from "../core/load-environment";
 
 loadEnvironment();
 

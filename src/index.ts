@@ -1,7 +1,7 @@
 import { Client, Events, GatewayIntentBits } from "discord.js";
-import { config as loadEnvironment } from "dotenv";
 
 import executeSlashCommand from "./core/execute-slash-command";
+import loadEnvironment from "./core/load-environment";
 
 loadEnvironment();
 
