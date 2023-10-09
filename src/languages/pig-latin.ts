@@ -18,13 +18,17 @@ class PigLatin {
       const firstLetter = match[0];
       const remaining = match.substring(1);
 
+      const isUppercase = firstLetter === capitalizeStr(firstLetter);
+
       let newStr = "";
 
-      if (firstLetter === capitalizeStr(firstLetter))
-        newStr = capitalizeStr(remaining);
-      else newStr = remaining;
+      if (remaining.length > 0) {
+        newStr = isUppercase ? capitalizeStr(remaining) : remaining;
+        newStr += firstLetter.toLowerCase();
+      } else {
+        newStr += firstLetter;
+      }
 
-      newStr += firstLetter.toLowerCase();
       newStr += SUFFIX;
       return newStr;
     });
@@ -44,13 +48,17 @@ class PigLatin {
         removedSuffixStr.length - 1
       );
 
+      const isUppercase = encryptedFirstLetter === capitalizeStr(encryptedFirstLetter);
+
       let newStr = "";
 
-      if (encryptedFirstLetter === capitalizeStr(encryptedFirstLetter))
-        newStr = capitalizeStr(decryptedFirstLetter);
-      else newStr = decryptedFirstLetter;
+      if (remaining.length > 0) {
+        newStr = isUppercase ? capitalizeStr(decryptedFirstLetter) : decryptedFirstLetter;
+        newStr += uncapitalizeStr(remaining);
+      } else {
+        newStr += decryptedFirstLetter;
+      }
 
-      newStr += uncapitalizeStr(remaining);
       return newStr;
     });
 
