@@ -1,29 +1,23 @@
+import {
+  WORD_REGEX,
+  isCapitalized,
+  capitalizeStr,
+  uncapitalizeStr,
+} from "../shared/util";
+
 // Pig Latin suffix
 const SUFFIX = "aye";
 
-// Regex for capturing words
-const wordRegex = /[a-záéíóúü]+/gi;
-
-function capitalizeStr(str: string): string {
-  return str[0].toUpperCase() + str.substring(1);
-}
-
-function uncapitalizeStr(str: string): string {
-  return str[0].toLowerCase() + str.substring(1);
-}
-
 class PigLatin {
   static encrypt(str: string): string {
-    const output = str.replace(wordRegex, (match) => {
+    const output = str.replace(WORD_REGEX, (match) => {
       const firstLetter = match[0];
       const remaining = match.substring(1);
-
-      const isUppercase = firstLetter === capitalizeStr(firstLetter);
 
       let newStr = "";
 
       if (remaining.length > 0) {
-        newStr = isUppercase ? capitalizeStr(remaining) : remaining;
+        newStr = isCapitalized(match) ? capitalizeStr(remaining) : remaining;
         newStr += firstLetter.toLowerCase();
       } else {
         newStr += firstLetter;
@@ -37,7 +31,7 @@ class PigLatin {
   }
 
   static decrypt(str: string): string {
-    const output = str.replace(wordRegex, (match) => {
+    const output = str.replace(WORD_REGEX, (match) => {
       const removedSuffixStr = match.substring(0, match.length - SUFFIX.length);
 
       const encryptedFirstLetter = removedSuffixStr[0];
@@ -48,12 +42,15 @@ class PigLatin {
         removedSuffixStr.length - 1
       );
 
-      const isUppercase = encryptedFirstLetter === capitalizeStr(encryptedFirstLetter);
+      const isUppercase =
+        encryptedFirstLetter === capitalizeStr(encryptedFirstLetter);
 
       let newStr = "";
 
       if (remaining.length > 0) {
-        newStr = isUppercase ? capitalizeStr(decryptedFirstLetter) : decryptedFirstLetter;
+        newStr = isUppercase
+          ? capitalizeStr(decryptedFirstLetter)
+          : decryptedFirstLetter;
         newStr += uncapitalizeStr(remaining);
       } else {
         newStr += decryptedFirstLetter;

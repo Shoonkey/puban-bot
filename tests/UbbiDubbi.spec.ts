@@ -16,8 +16,7 @@ const mutations: Mutation[] = [
   },
   {
     base: "I",
-    encrypted: "Ubi",
-    todo: true
+    encrypted: "Ubi"
   },
   {
     base: "Yellow",

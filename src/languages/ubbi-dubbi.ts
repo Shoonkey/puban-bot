@@ -1,13 +1,29 @@
+import {
+  WORD_REGEX,
+  capitalizeStr,
+  isCapitalized,
+  uncapitalizeStr,
+} from "../shared/util";
+
 const ADD_UB_TO = "aeiouyáéíóúü";
 
 class UbbiDubbi {
   // Replace lower and uppercase vowels with ub + vowels
+  // It preserves initial casing if the word is capitalized
+  // i.e "Agregar" -> "Ubagrubegubar"
   static encrypt(str: string): string {
-    const regexLower = new RegExp(`([${ADD_UB_TO}]+)`, "g");
-    const regexUpper = new RegExp(`([${ADD_UB_TO.toUpperCase()}]+)`, "g");
-    
-    const output = str.replace(regexLower, "ub$&").replace(regexUpper, "UB$&");
-    return output;
+    return str.replace(WORD_REGEX, (match) => {
+      const regexLower = new RegExp(`([${ADD_UB_TO}]+)`, "g");
+      const regexUpper = new RegExp(`([${ADD_UB_TO.toUpperCase()}]+)`, "g");
+
+      const uncapitalizedMatch = uncapitalizeStr(match);
+
+      const output = uncapitalizedMatch
+        .replace(regexLower, "ub$&")
+        .replace(regexUpper, "UB$&");
+
+      return isCapitalized(match) ? capitalizeStr(output) : output;
+    });
   }
 
   // Remove all ub's followed by vowels, except the ub's that were in the
@@ -16,8 +32,14 @@ class UbbiDubbi {
   static decrypt(str: string): string {
     const captureUbRegex = /(ub)(?!ub)/gi;
 
-    const output = str.replace(captureUbRegex, "");
-    return output;
+    return str.replace(WORD_REGEX, match => {
+      const uncapitalizedMatch = uncapitalizeStr(match);
+
+      const output = uncapitalizedMatch
+        .replace(captureUbRegex, "");
+
+      return isCapitalized(match) ? capitalizeStr(output) : output;
+    });
   }
 }
 
