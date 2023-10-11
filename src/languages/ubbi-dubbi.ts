@@ -48,7 +48,7 @@ class UbbiDubbi {
     return str.replace(REGEXES.WORD_REGEX, (fullWordMatch) => {
       const leadingYMatch = fullWordMatch.match(REGEXES.LEADING_Y);
 
-      const addUbMatchingCase = (match) => {
+      const addUbMatchingCase = (match: string) => {
         return `${isCapitalized(match) ? "UB" : "ub"}${match}`;
       };
 
