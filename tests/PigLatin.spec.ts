@@ -1,5 +1,6 @@
 import PigLatin from "../src/languages/pig-latin";
 import Mutation from "./util/Mutation";
+import testLanguage from "./util/testLanguage";
 
 const mutations: Mutation[] = [
   {
@@ -28,26 +29,4 @@ const mutations: Mutation[] = [
   }
 ];
 
-describe("PigLatin", () => {
-  describe("Encryption", () => {
-    mutations.forEach(mutation => {
-      if (mutation.todo)
-        it.todo(`Encrypts ${mutation.base}`);
-      else
-        it(`Encrypts '${mutation.base}'`, () => {
-          expect(PigLatin.encrypt(mutation.base)).toBe(mutation.encrypted);
-        });
-    });
-  });
-
-  describe("Decryption", () => {
-    mutations.forEach(mutation => {
-      if (mutation.todo)
-        it.todo(`Decrypts ${mutation.base}`);
-      else
-        it(`Decrypts '${mutation.encrypted}'`, () => {
-          expect(PigLatin.decrypt(mutation.encrypted)).toBe(mutation.base);
-        });
-    });
-  });
-});
+testLanguage("PigLatin", PigLatin, mutations);

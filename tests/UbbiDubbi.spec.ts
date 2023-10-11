@@ -1,5 +1,6 @@
 import UbbiDubbi from "../src/languages/ubbi-dubbi";
 import Mutation from "./util/Mutation";
+import testLanguage from "./util/testLanguage";
 
 const mutations: Mutation[] = [
   {
@@ -20,41 +21,16 @@ const mutations: Mutation[] = [
   },
   {
     base: "Yellow",
-    encrypted: "Yubellubow",
-    todo: true
+    encrypted: "Yubellubow"
   },
   {
     base: "Eye",
-    encrypted: "Ubeye",
-    todo: true
+    encrypted: "Ubeye"
   },
   {
     base: "Larynx",
-    encrypted: "Lubarubynx",
-    todo: true
+    encrypted: "Lubarubynx"
   }
 ];
 
-describe("UbbiDubbi", () => {
-  describe("Encryption", () => {
-    mutations.forEach(mutation => {
-      if (mutation.todo)
-        it.todo(`Encrypts ${mutation.base}`);
-      else
-        it(`Encrypts '${mutation.base}'`, () => {
-          expect(UbbiDubbi.encrypt(mutation.base)).toBe(mutation.encrypted);
-        });
-    });
-  });
-
-  describe("Decryption", () => {
-    mutations.forEach(mutation => {
-      if (mutation.todo)
-        it.todo(`Decrypts ${mutation.base}`);
-      else
-        it(`Decrypts '${mutation.encrypted}'`, () => {
-          expect(UbbiDubbi.decrypt(mutation.encrypted)).toBe(mutation.base);
-        });
-    });
-  });
-});
+testLanguage("UbbiDubbi", UbbiDubbi, mutations);

@@ -1,5 +1,6 @@
 import Puban from "../src/languages/puban";
 import Mutation from "./util/Mutation";
+import testLanguage from "./util/testLanguage";
 
 const mutations: Mutation[] = [
   {
@@ -24,26 +25,4 @@ const mutations: Mutation[] = [
   }
 ];
 
-describe("Puban", () => {
-  describe("Encryption", () => {
-    mutations.forEach(mutation => {
-      if (mutation.todo)
-        it.todo(`Encrypts ${mutation.base}`);
-      else
-        it(`Encrypts '${mutation.base}'`, () => {
-          expect(Puban.encrypt(mutation.base)).toBe(mutation.encrypted);
-        });
-    });
-  });
-
-  describe("Decryption", () => {
-    mutations.forEach(mutation => {
-      if (mutation.todo)
-        it.todo(`Decrypts ${mutation.base}`);
-      else
-        it(`Decrypts '${mutation.encrypted}'`, () => {
-          expect(Puban.decrypt(mutation.encrypted)).toBe(mutation.base);
-        });
-    });
-  });
-});
+testLanguage("Puban", Puban, mutations);
