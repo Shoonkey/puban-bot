@@ -1,12 +1,12 @@
 import {
   WORD_REGEX,
+  VOWELS,
   capitalizeStr,
   isCapitalized,
+  isFullCaps,
   uncapitalizeStr,
+  isUppercaseSentence,
 } from "../shared/util";
-
-const DIACRITICS = "áéíóúü";
-const VOWELS = `aeiou${DIACRITICS}`;
 
 const REGEXES = {
   WORD_REGEX,
@@ -45,6 +45,8 @@ class UbbiDubbi {
   // Replace groups of vowels with ub + vowels
   // More details on how it works at the top comment.
   static encrypt(str: string): string {
+    const uppercaseSentenceFlag = isUppercaseSentence(str);
+
     return str.replace(REGEXES.WORD_REGEX, (fullWordMatch) => {
       const leadingYMatch = fullWordMatch.match(REGEXES.LEADING_Y);
 
@@ -71,6 +73,11 @@ class UbbiDubbi {
           : output;
       }
 
+      if (
+        uppercaseSentenceFlag ||
+        (fullWordMatch.length > 1 && isFullCaps(fullWordMatch))
+      )
+        finalString = finalString.toUpperCase();
 
       return finalString;
     });
@@ -79,12 +86,23 @@ class UbbiDubbi {
   // Remove all ub's followed by vowels
   // More details on how it works on the top comment
   static decrypt(str: string): string {
-    return str.replace(REGEXES.WORD_REGEX, (match) => {
-      const uncapitalizedMatch = uncapitalizeStr(match);
+    const uppercaseSentenceFlag = isUppercaseSentence(str);
 
-      const output = uncapitalizedMatch.replace(REGEXES.UB_REGEX, "");
+    return str.replace(REGEXES.WORD_REGEX, (wordMatch) => {
+      const output = wordMatch.replace(REGEXES.UB_REGEX, "");
 
-      return isCapitalized(match) ? capitalizeStr(output) : output;
+      // If the sentence is in full caps,
+      // or the wordis in full caps or not capitalized at all,
+      // no further modifying is needed
+      if (
+        uppercaseSentenceFlag ||
+        (wordMatch.length > 1 && isFullCaps(wordMatch)) ||
+        !isCapitalized(wordMatch)
+      )
+        return output;
+
+      // else, it needs to be capitalized
+      return capitalizeStr(output);
     });
   }
 }

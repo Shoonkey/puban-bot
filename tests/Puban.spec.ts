@@ -22,6 +22,10 @@ const mutations: Mutation[] = [
   {
     base: "I",
     encrypted: "Biuaye"
+  },
+  {
+    base: "YO ESTOY GRITANDO!!",
+    encrypted: "UBOYAYE BESTUBOYUAYE RUBITUBANDUBOGAYE!!"
   }
 ];
 

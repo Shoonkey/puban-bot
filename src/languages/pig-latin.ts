@@ -4,6 +4,7 @@ import {
   capitalizeStr,
   uncapitalizeStr,
   isFullCaps,
+  isUppercaseSentence,
 } from "../shared/util";
 
 // Pig Latin suffix
@@ -11,6 +12,8 @@ const SUFFIX = "aye";
 
 class PigLatin {
   static encrypt(str: string): string {
+    const uppercaseSentenceFlag = isUppercaseSentence(str);
+
     const output = str.replace(WORD_REGEX, (match) => {
       const firstLetter = match[0];
       const remaining = match.substring(1);
@@ -24,7 +27,14 @@ class PigLatin {
         newStr += firstLetter;
       }
 
-      newStr += (match.length > 1 && isFullCaps(match)) ? SUFFIX.toUpperCase() : SUFFIX;
+      if (
+        uppercaseSentenceFlag ||
+        (match.length > 1 && isFullCaps(match))
+      )
+        newStr += SUFFIX.toUpperCase();
+      else
+        newStr += SUFFIX;
+      
       return newStr;
     });
 

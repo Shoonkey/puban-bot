@@ -30,6 +30,10 @@ const mutations: Mutation[] = [
   {
     base: "Larynx",
     encrypted: "Lubarubynx"
+  },
+  {
+    base: "FULLCAPS",
+    encrypted: "FUBULLCUBAPS"
   }
 ];
 
