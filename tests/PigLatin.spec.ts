@@ -21,6 +21,11 @@ const mutations: Mutation[] = [
   {
     base: "i",
     encrypted: "iaye"
+  },
+  {
+    base: "FULLCAPS",
+    encrypted: "ULLCAPSFAYE",
+    todo: true
   }
 ];
 

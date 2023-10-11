@@ -13,6 +13,26 @@ const mutations: Mutation[] = [
   {
     base: "Gracias!",
     encrypted: "Grubacubias!"
+  },
+  {
+    base: "I",
+    encrypted: "Ubi",
+    todo: true
+  },
+  {
+    base: "Yellow",
+    encrypted: "Yubellubow",
+    todo: true
+  },
+  {
+    base: "Eye",
+    encrypted: "Ubeye",
+    todo: true
+  },
+  {
+    base: "Larynx",
+    encrypted: "Lubarubynx",
+    todo: true
   }
 ];
 
