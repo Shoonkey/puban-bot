@@ -3,6 +3,7 @@ import {
   isCapitalized,
   capitalizeStr,
   uncapitalizeStr,
+  isFullCaps,
 } from "../shared/util";
 
 // Pig Latin suffix
@@ -18,12 +19,12 @@ class PigLatin {
 
       if (remaining.length > 0) {
         newStr = isCapitalized(match) ? capitalizeStr(remaining) : remaining;
-        newStr += firstLetter.toLowerCase();
+        newStr += isFullCaps(match) ? firstLetter : firstLetter.toLowerCase();
       } else {
         newStr += firstLetter;
       }
 
-      newStr += SUFFIX;
+      newStr += (match.length > 1 && isFullCaps(match)) ? SUFFIX.toUpperCase() : SUFFIX;
       return newStr;
     });
 
@@ -33,17 +34,18 @@ class PigLatin {
   static decrypt(str: string): string {
     const output = str.replace(WORD_REGEX, (match) => {
       const removedSuffixStr = match.substring(0, match.length - SUFFIX.length);
+      const suffixInStr = match.substring(removedSuffixStr.length);
 
       const encryptedFirstLetter = removedSuffixStr[0];
       const decryptedFirstLetter =
         removedSuffixStr[removedSuffixStr.length - 1];
+      
       const remaining = removedSuffixStr.substring(
         0,
         removedSuffixStr.length - 1
       );
 
-      const isUppercase =
-        encryptedFirstLetter === capitalizeStr(encryptedFirstLetter);
+      const isUppercase = isCapitalized(encryptedFirstLetter);
 
       let newStr = "";
 
@@ -51,7 +53,7 @@ class PigLatin {
         newStr = isUppercase
           ? capitalizeStr(decryptedFirstLetter)
           : decryptedFirstLetter;
-        newStr += uncapitalizeStr(remaining);
+        newStr += isFullCaps(suffixInStr) ? remaining : uncapitalizeStr(remaining);
       } else {
         newStr += decryptedFirstLetter;
       }

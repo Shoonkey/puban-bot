@@ -9,7 +9,7 @@ export function uncapitalizeStr(str: string): string {
   return str[0].toLowerCase() + str.substring(1);
 }
 
-export function isCapitalized(str: string) {
+export function isCapitalized(str: string): boolean {
   const isFirstLetterUppercase = str[0] === capitalizeStr(str[0]);
 
   if (str.length === 1)
@@ -17,4 +17,8 @@ export function isCapitalized(str: string) {
 
   const isNextLetterLowercase = str[1] === str[1].toLowerCase();
   return isFirstLetterUppercase && isNextLetterLowercase;
+}
+
+export function isFullCaps(str: string): boolean {
+  return str === str.toUpperCase();
 }
