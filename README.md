@@ -2,6 +2,16 @@
 
 A bot built to teach people about a made-up cipher I've made with a friend. The cipher is called Puban.
 
+> The language core translation scripts and unit tests have been moved to another repo, [puban-languages](https://github.com/Shoonkey/puban-languages)
+
+## Cloning this repo
+
+This repo uses the Puban language core repo as a [Git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules), so the usual clone won't clone the submodule. For proper cloning, run
+
+```sh
+git clone --recurse-submodules [repo_url]
+```
+
 ## Installing dependencies
 
 This is a Node project, so to run it you'll need NodeJS and NPM installed. It's been tested in the version v18.16.0 of Node.

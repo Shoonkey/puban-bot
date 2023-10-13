@@ -1,5 +1,5 @@
 import createSlashCommand from "../core/create-slash-command";
-import Puban from "../languages/puban";
+import Puban from "../languages/src/puban";
 
 export default createSlashCommand({
   configureBuilder(builder) {
